@@ -1,1 +1,114 @@
 
+public class Employee {
+	
+	int eid;
+	String ename;
+	int esalary;
+	
+		
+	public Employee() {
+
+	}
+	public Employee(int eid, String ename, int esalary) {
+		super();
+		this.eid = eid;
+		this.ename = ename;
+		this.esalary = esalary;
+	}
+	public int getEid() {
+		return eid;
+	}
+	public void setEid(int eid) {
+		this.eid = eid;
+	}
+	public String getEname() {
+		return ename;
+	}
+	public void setEname(String ename) {
+		this.ename = ename;
+	}
+	public int getEsalary() {
+		return esalary;
+	}
+	public void setEsalary(int esalary) {
+		this.esalary = esalary;
+	}
+	@Override
+	public String toString() {
+		return "Employee [eid=" + eid + ", ename=" + ename + ", esalary=" + esalary + "]";
+	}
+}
+
+
+
+_____________________________________________________________________________________________
+Create Client class
+_____________________________________________________________________________________________
+
+ import org.springframework.context.ApplicationContext;
+ import org.springframework.context.support.ClassPathXmlApplicationContext;
+ 
+	
+	public class Client {
+		
+	public static  void main (String[]args) {
+		
+		Employee e = new Employee();
+		
+	     
+		e.setEid(201);
+		e.setEname ("Sagar Chadderwala");
+		e.setEsalary(70000);
+		
+		
+		
+		System.out.println(e);
+		
+		
+		//Inversion of Control (IOC)
+		
+		
+		//1. add jar file for spring core
+		//2. configure java object in an XML file
+		//3. use Spring IOC container eg. Beanfactory or applicationContext to get the object cobstructed  by them
+		
+ ApplicationContext context = new ClassPathXmlApplicationContext ("EmployeeBean.xml");
+	
+		Employee e1 = (Employee)context.getBean("emp1");
+		Employee e2 = (Employee)context.getBean("emp2");
+	
+		
+		System.out.println("------------Spring IOC in Action-----------");
+		
+		System.out.println(e1);
+		System.out.println(e2);
+		
+		
+	}
+	
+}
+_________________________________________________________________________________________
+Employee Bean XML code
+_________________________________________________________________________________________
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+    
+    <bean id="emp1"    class="co.SpringDemo.Employee">
+    <property name="eid" value="210"/>
+    <property name="ename" value="Sagar Chadderwala"/>
+    <property name="esalary" value="70000"/>
+    </bean>
+   
+    <bean id="emp2"    class="co.SpringDemo.Employee">
+    <property name="eid" value="211"/>
+    <property name="ename" value="John Williams"/>
+    <property name="esalary" value="65000"/>
+    </bean>
+ 
+ </bean>
